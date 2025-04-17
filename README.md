@@ -1,0 +1,83 @@
+# Live Demo Notes
+
+## Create a demo app
+
+Install `bslib` from GitHub:
+
+```r
+pak::pak("rstudio/bslib")
+```
+
+<https://rstudio.github.io/bslib/dev/articles/brand-yml/>
+
+```r
+new_app_dir <- "brand-demo"
+template <- fs::path_package("bslib", "examples-shiny/brand.yml")
+
+# Copy the template files into your new app directory
+fs::dir_copy(template, new_app_dir)
+```
+
+Then delete the built-in `brand-demo/_brand.yml` and create a new `_brand.yml` file.
+Then run the demo app.
+
+```r
+shiny::runApp("brand-demo")
+```
+
+## Translate the brand guidelines
+
+Open the `Pulse Mobile Brand Guidelines.pdf` file.
+I've already downloaded the logos, so they're ready to go.
+
+Here's some basic guidance:
+
+```yml
+meta:
+  name: Pulse Mobile
+  link: https://pulse.mobile
+
+logo:
+  images:
+    icon_white: logos/icon-white.png
+    icon_black: logos/icon-black.png
+  small: logos/icon-color.png
+  medium: logos/logomark-med-color.png
+
+color:
+  palette:
+    purple: "#8a2be2"
+    blue: "#00c2ff"
+    green: "#4dc964"
+    yellow: "#ffd600"
+    red: "#ff5a5f"
+    black: "#121212"
+    white: "#f8f8f8"
+    
+  primary: purple
+  info: blue
+  
+typography:
+  fonts:
+    - family: Montserrat Alternates
+      source: google
+    
+    - family: Montserrat
+      source: google
+      
+    - family: Space Mono
+      source: google
+      
+  base: 
+    family: Montserrat
+  headings: 
+    family: Montserrat Alternates
+    weight: 500
+    color: purple
+  monospace: Space Mono
+  monospace-inline:
+    color: purple
+  link:
+    color: red
+
+```

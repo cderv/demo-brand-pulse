@@ -1,0 +1,42 @@
+meta:
+  name: Pulse Mobile
+  link: https://pulse.mobile
+
+color:
+  palette:
+    purple: "#8a2be2"
+    blue: "#00c2ff"
+    green: "#4dc964"
+    yellow: "#ffd600"
+    red: "#ff5a5f"
+    black: "#121212"
+    white: "#f8f8f8"
+    
+  primary: purple
+  info: blue
+  
+typography:
+  fonts:
+    - family: Montserrat Alternates
+      source: google
+    - family: Montserrat
+      source: google
+    - family: Space Mono
+      source: google
+      
+  base: Montserrat
+  headings: 
+    family: Montserrat Alternates
+    weight: 500
+  monospace: Space Mono
+  monospace-inline:
+    color: purple
+
+logo: 
+  images:
+    full-color: logos/logomark-full-color.png
+    med-color: logos/logomark-med-color.png
+    icon-color: logos/icon-color.png
+  small: icon-color
+  medium: med-color
+  large: full-color

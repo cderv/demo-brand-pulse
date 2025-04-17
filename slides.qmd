@@ -1,0 +1,189 @@
+---
+title: "How Gen Z and Millennials are Choosing Pulse Mobile"
+subtitle: "Plan Flexibility & Community Impact (Q1 2025)"
+format:
+  revealjs:
+    theme: default
+    footer: "Pulse Mobile | Q1-Q2 2025"
+    transition: slide
+    background-transition: fade
+    highlight-style: github
+execute:
+  echo: false
+  warning: false
+---
+
+```{r}
+#| label: setup
+#| include: false
+
+library(tidyverse)
+library(gt)
+library(ggplot2)
+
+source("_data.R")
+
+brand <- attr(bslib::bs_theme(), "brand") # will be brand.yml::read_brand_yml()
+```
+
+## Our Mission
+
+Transparent pricing, flexible plans, and community-focused initiatives that resonate with the 18-30 demographic.
+
+## Q1-Q2 Snapshot {.smaller}
+
+:::: {.columns}
+
+::: {.column width="50%"}
+### The Numbers
+- **1,970+** total sign-ups in Q1-Q2
+- **60%** from Gen Z (18-24)
+- **40%** from Millennials (25-30)
+- **33** total community events
+- **1,005** event participants
+:::
+
+::: {.column width="50%"}
+### Key Insights
+- Satisfaction score increased from **4.2** to **4.7**
+- Social mentions up **149%** 
+- Most popular plan shifted from "Flex" to "Community"
+- Event participation per customer **growing steadily**
+:::
+
+::::
+
+## The Pulse is Strong!
+
+```{r}
+#| label: fig-signups
+#| fig-width: 10
+#| fig-height: 6
+#| fig-align: center
+
+pulse_data |>
+  pivot_longer(
+    cols = c(signups_18_24, signups_25_30),
+    names_to = "age_group",
+    values_to = "signups"
+  ) |>
+  mutate(
+    age_group = case_when(
+      age_group == "signups_18_24" ~ "Gen Z (18-24)",
+      age_group == "signups_25_30" ~ "Millennials (25-30)"
+    ),
+    month = factor(
+      month,
+      levels = c("January", "February", "March", "April", "May", "June")
+    )
+  ) |>
+  ggplot(aes(x = month, y = signups, fill = age_group)) +
+  geom_bar(stat = "identity", position = "stack") +
+  geom_text(
+    aes(label = signups, group = age_group),
+    position = position_stack(vjust = 0.5),
+    color = "white",
+    fontface = "bold"
+  ) +
+  labs(
+    title = "Monthly Sign-ups by Age Group",
+    subtitle = "Q1-Q2 2025",
+    x = NULL,
+    y = "Number of Sign-ups",
+    fill = "Age Group"
+  ) +
+  theme(
+    plot.title = element_text(face = "bold", size = 24),
+    plot.subtitle = element_text(size = 18),
+    axis.title = element_text(size = 16),
+    axis.text = element_text(size = 14),
+    legend.position = "bottom",
+    legend.title = element_text(face = "bold", size = 16),
+    legend.text = element_text(size = 14),
+    panel.grid.minor = element_blank(),
+    axis.text.x = element_text(angle = 45, hjust = 1, size = 14)
+  ) +
+  if (!is.null(brand)) {
+    scale_fill_manual(
+      values = unlist(set_names(
+        brand$color$palette[c("purple", "blue")],
+        c("Gen Z (18-24)", "Millennials (25-30)")
+      ))
+    )
+  }
+```
+
+## By The Numbers {.smaller}
+
+```{r}
+pulse_data |>
+  mutate(
+    total_events = event_count,
+    event_engagement = paste0(round(100 * participants_per_event / total_signups, 1), "%")
+  ) |>
+  select(month, popular_plan, total_signups, total_events, event_participants, satisfaction_score) |>
+  gt() |>
+  tab_header(
+    title = "Pulse Mobile Performance Metrics",
+    subtitle = "Q1-Q2 2025"
+  ) |>
+  fmt_number(
+    columns = c(total_signups, event_participants),
+    decimals = 0,
+    use_seps = TRUE
+  ) |>
+  fmt_number(
+    columns = satisfaction_score,
+    decimals = 1
+  ) |>
+  cols_label(
+    month = "Month",
+    popular_plan = "Top Plan",
+    total_signups = "Sign-ups",
+    total_events = "Events",
+    event_participants = "Participants",
+    satisfaction_score = "Satisfaction"
+  ) |>
+  tab_style(
+    style = cell_text(weight = "bold"),
+    locations = cells_column_labels()
+  )
+```
+
+## What We're Seeing {.incremental}
+
+- **Gen Z dominance**: Consistently representing ~60% of our new sign-ups
+- **Shifting preferences**: Plans with community impact gaining traction
+- **Engagement growth**: Event participation up 210% since January
+- **Digital buzz**: Social mentions more than doubled in six months
+- **Customer love**: Satisfaction scores reached all-time high of 4.7
+
+## Why This Matters
+
+We're not just selling phone plans. We're building a movement.
+
+## Next Steps {.smaller}
+
+:::: {.columns}
+
+::: {.column width="50%"}
+### Double Down On
+- Community-focused plans and events
+- Transparent messaging around flexible options
+- Local initiatives that drive engagement
+- Digital storytelling featuring real customers
+:::
+
+::: {.column width="50%"}
+### Areas to Explore
+- Targeted offerings for Gen Z's specific needs
+- Expanding community events to new markets
+- Social cause partnerships with authentic alignment
+- Referral programs to amplify word-of-mouth
+:::
+
+::::
+
+## Thank You!
+
+Questions?

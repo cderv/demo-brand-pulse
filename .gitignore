@@ -1,0 +1,6 @@
+aqs.env
+*_files/
+*_cache/
+*.log
+*.tex
+*.html
