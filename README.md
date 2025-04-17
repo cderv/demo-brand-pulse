@@ -68,16 +68,22 @@ typography:
     - family: Space Mono
       source: google
       
-  base: 
-    family: Montserrat
-  headings: 
-    family: Montserrat Alternates
-    weight: 500
-    color: purple
+  base: Montserrat
+  headings: Montserrat Alternates
   monospace: Space Mono
-  monospace-inline:
-    color: purple
-  link:
-    color: red
-
 ```
+
+See the final `_brand.yml` for more details.
+
+## Try the example reports
+
+There are three objects in here:
+
+* A Shiny for R app: `app.R`
+* A Quarto report (with `typst` and `html` output formats)
+* A Quarto slide deck
+
+Try all three!
+
+Also try removing the `_brand.yml` file (or renaming it) to see each format/output without any styling.
+(Spoiler alert: they're not bad but they're not the same.)
