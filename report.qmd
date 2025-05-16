@@ -9,8 +9,6 @@ format:
   html:
     toc: true
 
-editor: visual
-
 execute:
   echo: false
   warning: false
@@ -34,21 +32,31 @@ brand <- attr(bslib::bs_theme(), "brand") # will be brand.yml::read_brand_yml()
 
 ## Intro
 
-Pulse Mobile's rapid growth among Gen Z and Millennials reflects our commitment to transparent pricing, flexible plans, and 
-genuinely impactful community initiatives that connect with the 18-30 demographic where they live, work, and play.
+Pulse Mobile's rapid growth among Gen Z and Millennials reflects our commitment to transparent pricing, flexible plans, and genuinely impactful community initiatives that connect with the 18-30 demographic where they live, work, and play.
 
 ## Q1 2025 Pulse Performance
 
 ```{r}
 #| label: summary-table
 
-pulse_data |>
+tab <- pulse_data |>
   mutate(
     total_events = event_count,
-    event_engagement = paste0(round(100 * participants_per_event / total_signups, 1), "%")
+    event_engagement = paste0(
+      round(100 * participants_per_event / total_signups, 1),
+      "%"
+    )
   ) |>
-  select(month, popular_plan, total_signups, total_events, event_participants, satisfaction_score, event_engagement) |>
-  gt() |>
+  select(
+    month,
+    popular_plan,
+    total_signups,
+    total_events,
+    event_participants,
+    satisfaction_score,
+    event_engagement
+  ) |>
+  gt(rowname_col = "month") |>
   tab_header(
     title = "Pulse Mobile Sign-ups & Community Engagement",
     subtitle = "Q1-Q2 2025 Performance Metrics"
@@ -79,17 +87,39 @@ pulse_data |>
     style = cell_text(weight = "bold"),
     locations = cells_column_labels()
   ) |>
+  tab_style(
+    style = cell_text(
+      size = "smaller",
+      transform = "uppercase"
+    ),
+    locations = cells_stub()
+  ) |>
   tab_options(
     heading.title.font.size = 18,
     heading.subtitle.font.size = 14,
     table.font.size = 12,
     heading.align = "left",
     table.border.top.width = 3,
-    table.border.top.color = "#FF5733",
-    table.border.bottom.color = "#FF5733",
-    column_labels.border.bottom.width = 2,
-    column_labels.border.bottom.color = "#33A8FF"
+    column_labels.border.bottom.width = 2
   )
+if (is.null(brand)) {
+  tab
+} else {
+  tab |>
+    gt::tab_options(
+      table.border.top.color = brand$color$palette$purple,
+      table.border.bottom.color = brand$color$palette$purple,
+      column_labels.border.bottom.color = brand$color$palette$purple
+    ) |>
+    gt::tab_style(
+      style = cell_fill(color = brand$color$palette$blue),
+      locations = cells_title()
+    ) |>
+    tab_style(
+      style = cell_text(color = brand$color$palette$purple),
+      locations = cells_stub()
+    )
+}
 ```
 
 ## Growth Trends
@@ -101,7 +131,7 @@ pulse_data |>
 pulse_data |>
   pivot_longer(
     cols = c(signups_18_24, signups_25_30),
-    names_to = "age_group", 
+    names_to = "age_group",
     values_to = "signups"
   ) |>
   mutate(
@@ -109,7 +139,10 @@ pulse_data |>
       age_group == "signups_18_24" ~ "Gen Z (18-24)",
       age_group == "signups_25_30" ~ "Millennials (25-30)"
     ),
-    month = factor(month, levels = c("January", "February", "March", "April", "May", "June"))
+    month = factor(
+      month,
+      levels = c("January", "February", "March", "April", "May", "June")
+    )
   ) |>
   ggplot(aes(x = month, y = signups, fill = age_group)) +
   geom_bar(stat = "identity", position = "stack") +
@@ -195,18 +228,10 @@ if (!is.null(brand)) {
 
 ## Pulse Check (Analysis)
 
-The data doesn't lie, and neither do we! Our Q1-Q2 performance shows Pulse Mobile isn't just growing—we're creating genuine 
-connections. Gen Z continues to lead our sign-up growth (averaging nearly 60% of new customers), while our community events 
-are absolutely crushing it with participation up 210% from January to June.
+The data doesn't lie, and neither do we! Our Q1-Q2 performance shows Pulse Mobile isn't just growing—we're creating genuine connections. Gen Z continues to lead our sign-up growth (averaging nearly 60% of new customers), while our community events are absolutely crushing it with participation up 210% from January to June.
 
-As our community expands, so does customer satisfaction—reaching an all-time high of 4.7 in June. This isn't just about 
-selling phone plans; it's about building a movement where transparent pricing meets authentic community impact. The shift in 
-popular plans from "Flex" to "Community" shows our audience isn't just looking for flexibility; they want to feel part of 
-something bigger.
+As our community expands, so does customer satisfaction—reaching an all-time high of 4.7 in June. This isn't just about selling phone plans; it's about building a movement where transparent pricing meets authentic community impact. The shift in popular plans from "Flex" to "Community" shows our audience isn't just looking for flexibility; they want to feel part of something bigger.
 
-Social mentions have more than doubled over six months, proving that when you create genuine connections, people actually 
-want to talk about you! With event engagement consistently above 25% of our customer base, Pulse Mobile isn't just a service 
-provider—we're becoming an essential part of our customers' social landscape.
+Social mentions have more than doubled over six months, proving that when you create genuine connections, people actually want to talk about you! With event engagement consistently above 25% of our customer base, Pulse Mobile isn't just a service provider—we're becoming an essential part of our customers' social landscape.
 
-Let's keep this momentum going and continue to disrupt the industry with plans that make sense and community initiatives that
-make a difference. The pulse is strong, and it's beating to our own rhythm!
+Let's keep this momentum going and continue to disrupt the industry with plans that make sense and community initiatives that make a difference. The pulse is strong, and it's beating to our own rhythm!

@@ -4,3 +4,4 @@ aqs.env
 *.log
 *.tex
 *.html
+/.quarto/

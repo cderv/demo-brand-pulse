@@ -1,0 +1,4 @@
+project: 
+  pre-render: _scripts/remove-brand.R
+  post-render: _scripts/restore-brand.R
+  output-dir: "_output-nobrand"
