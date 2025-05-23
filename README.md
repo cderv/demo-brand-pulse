@@ -1,3 +1,6 @@
+> [!NOTE]
+> This repository is a fork of [gadenbuie/brand-yml-r-for-the-rest-of-us](https://github.com/gadenbuie/brand-yml-r-for-the-rest-of-us). It is being used as an example in the presentation [Personalizing Quarto documents with _brand.yml](https://cderv.github.io/rr2025-quarto-brand-yml/) at Rencontres R 2025. See the [presentation repository](https://github.com/cderv/quarto-brand-yml) for more information.
+
 # Live Demo Notes
 
 ## Create a demo app
@@ -87,3 +90,4 @@ Try all three!
 
 Also try removing the `_brand.yml` file (or renaming it) to see each format/output without any styling.
 (Spoiler alert: they're not bad but they're not the same.)
+
